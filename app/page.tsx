@@ -1,7 +1,7 @@
 // app/page.tsx
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { POKEMON_LIST, PokemonCharacter } from '@/data/pokemon';
 import { TRAINER_LIST, TrainerMaster } from '@/data/trainers';
 import TitleScreen, { TrainerUser } from '@/components/TitleScreen';
@@ -26,12 +26,72 @@ export default function Home() {
   const [activeSection, setActiveSection] = useState<string>('hero');
   const [currentUser, setCurrentUser] = useState<TrainerUser | null>(null);
 
+  // Track active section via IntersectionObserver for sidebar highlight
+  const isManualScrollRef = useRef(false);
+
+  useEffect(() => {
+    if (gameState !== 'portfolio') return;
+
+    const sectionIds = ['hero', 'about', 'skills', 'showreel', 'projects', 'experience', 'contact'];
+    const visibleSections = new Map<string, number>();
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (isManualScrollRef.current) return;
+
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            visibleSections.set(entry.target.id, entry.intersectionRatio);
+          } else {
+            visibleSections.delete(entry.target.id);
+          }
+        });
+
+        // Pick the section with the highest intersection ratio
+        let maxRatio = 0;
+        let topSection = '';
+        visibleSections.forEach((ratio, id) => {
+          if (ratio > maxRatio) {
+            maxRatio = ratio;
+            topSection = id;
+          }
+        });
+
+        if (topSection) {
+          setActiveSection(topSection);
+        }
+      },
+      {
+        threshold: [0.1, 0.2, 0.3, 0.5, 0.7],
+        rootMargin: '-10% 0px -10% 0px',
+      }
+    );
+
+    // Delay slightly to ensure DOM is rendered
+    const timer = setTimeout(() => {
+      sectionIds.forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) observer.observe(el);
+      });
+    }, 500);
+
+    return () => {
+      clearTimeout(timer);
+      observer.disconnect();
+    };
+  }, [gameState]);
+
   const handleNavigate = (sectionId: string) => {
     setActiveSection(sectionId);
+    isManualScrollRef.current = true;
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
+    // Re-enable observer after scroll animation completes
+    setTimeout(() => {
+      isManualScrollRef.current = false;
+    }, 1000);
   };
 
   return (

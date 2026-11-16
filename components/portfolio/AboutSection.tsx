@@ -204,7 +204,7 @@ export default function AboutSection({ activePokemon, activeTrainer }: AboutSect
             {mainSlide === 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
                 {/* Visual Box Kiri: 2-Slide Profile Carousel */}
-                <div className="md:col-span-5 flex flex-col items-center justify-between p-5 sm:p-6 rounded-2xl bg-black/60 border border-white/10 min-h-[420px] text-center relative overflow-hidden group shadow-inner">
+                <div className="md:col-span-5 flex flex-col items-center justify-between p-4 sm:p-5 rounded-2xl bg-black/60 border border-white/10 min-h-[340px] text-center relative overflow-hidden group shadow-inner">
                   <div className="absolute top-3 right-3 z-20">
                     <span className="text-[9px] font-mono px-2.5 py-0.5 rounded-full bg-white/10 text-zinc-300 border border-white/10 backdrop-blur-sm">
                       {profileSlide === 0 ? 'REAL PROFILE ✦' : 'MAESTRO PERSONA ✦'}
@@ -364,7 +364,7 @@ export default function AboutSection({ activePokemon, activeTrainer }: AboutSect
 
               <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
                 {/* Visual Box Kiri: 3-Photo Hobby Gallery Carousel */}
-                <div className="md:col-span-5 flex flex-col items-center justify-between p-5 sm:p-6 rounded-2xl bg-black/60 border border-white/10 min-h-[420px] text-center relative overflow-hidden group shadow-inner">
+                <div className="md:col-span-5 flex flex-col items-center justify-between p-4 sm:p-5 rounded-2xl bg-black/60 border border-white/10 min-h-[340px] text-center relative overflow-hidden group shadow-inner">
                   <div className="absolute top-3 right-3 z-20">
                     <span className="text-[9px] font-mono px-2.5 py-0.5 rounded-full bg-white/10 text-zinc-300 border border-white/10 backdrop-blur-sm">
                       LIFESTYLE & PASSION ✦
@@ -374,7 +374,7 @@ export default function AboutSection({ activePokemon, activeTrainer }: AboutSect
                   {/* Kontainer Foto Hobi */}
                   <div className="flex-1 w-full flex flex-col items-center justify-center my-auto transition-all duration-500">
                     <div
-                      className="relative w-44 h-48 sm:w-48 sm:h-52 md:w-52 md:h-56 rounded-2xl overflow-hidden mb-3.5 border-2 shadow-2xl transition-transform duration-300 group-hover:scale-105 bg-black/70 flex items-center justify-center"
+                      className="relative w-40 h-44 sm:w-44 sm:h-48 md:w-48 md:h-52 rounded-2xl overflow-hidden mb-3 border-2 shadow-2xl transition-transform duration-300 group-hover:scale-105 bg-black/70 flex items-center justify-center"
                       style={{
                         borderColor: activePokemon.theme.primary,
                         boxShadow: `0 0 30px ${activePokemon.theme.primary}55`,
